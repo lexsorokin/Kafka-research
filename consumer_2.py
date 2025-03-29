@@ -3,7 +3,7 @@ from confluent_kafka import Consumer, KafkaException
 # настройка подключения к Kafka
 conf = {
     'bootstrap.servers': 'localhost:9092',
-    'group.id': 'my-group', # Группа потребителя 
+    'group.id': 'group1', # Группа потребителя 
     'auto.offset.reset': 'earliest', # Читаем сообщения с самого начала
 }
 
@@ -11,7 +11,7 @@ consumer = Consumer(conf)
 
 def consume(topic='test-topic'): 
     consumer.subscribe([topic])
-    print(f'Ожидаем сообщений из темы "{topic}"...')
+    print(f'Consumer 2 ждет сообщения...')
 
     try: 
         while True: 
@@ -21,9 +21,9 @@ def consume(topic='test-topic'):
             if msg.error(): 
                 raise KafkaException(msg.error())
             
-            print(f'Получено сообщение: {msg.value().decode("utf-8")}')
+            print(f'Consumer 2 получил: {msg.value().decode("utf-8")}')
     except KeyboardInterrupt:
-        print('Остановка Consumer...')
+        print('Остановка Consumer 2...')
     
     finally: 
         consumer.close()
