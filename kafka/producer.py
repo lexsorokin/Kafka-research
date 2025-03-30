@@ -17,7 +17,7 @@ def delivery_report(err, msg):
         print(f"Сообщение доставлено в {msg.topic()} [{msg.partition()}]")
 
 
-def send_message(topic="test-topic"):
+def send_message(topic="orders"):
     for i in range(10):
         message = f"Сообщение: {datetime.now()}"
         producer.produce(topic, message.encode("utf-8"), callback=delivery_report)

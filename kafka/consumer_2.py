@@ -10,7 +10,7 @@ conf = {
 consumer = Consumer(conf)
 
 
-def consume(topic="test-topic"):
+def consume(topic="orders"):
     consumer.subscribe([topic])
     print(f"Consumer 2 ждет сообщения...")
 
